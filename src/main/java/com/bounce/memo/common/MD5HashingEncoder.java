@@ -19,7 +19,7 @@ public class MD5HashingEncoder {
 
             StringBuilder sb = new StringBuilder();
             for(int i = 0; i < digest.length; i++) {
-                String hex = Integer.toHexString(digest[i] & 0xff);
+                sb.append(Integer.toHexString(digest[i] & 0xff));
             }
 
             return sb.toString();
