@@ -20,4 +20,22 @@
             , #{email}
         )
     </insert>
+
+    <select id="selectUser" parameterType="map"
+    resultType="com.bounce.memo.user.domain.User">
+        SELECT
+            `id`
+            , `login_id`
+            , `password`
+            , `name`
+            , `email`
+            , `created_at`
+            , `updated_at`
+        FROM
+            `user`
+        WHERE
+            `loginId` = #{loginid}
+            AND `password` = #{password}
+    </select>
+
 </mapper>

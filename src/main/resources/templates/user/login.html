@@ -6,7 +6,7 @@
 
         <section layout:fragment="contents" class="contents d-flex justify-content-center">
             <div class="user-box my-5 p-5 rounded-lg">
-                <h2 class="d-flex justify-content-center">회원 가입</h2>
+                <h2 class="d-flex justify-content-center">로그인</h2>
                 <input type="text" class="form-control mt-3" placeholder="아이디" id="idInput">
                 <input type="password" class="form-control mt-2" placeholder="비밀번호" id="passwordInput">
                 <button type="button" class="btn btn-secondary btn-block mt-3" id="loginBtn">로그인</button>
@@ -14,7 +14,40 @@
                     <a href="/user/join">회원가입</a>
                 </div>
             </div>
+
         </section>
 
+    <script layout:fragment="script">
+        $("#loginBtn").on("click", function() {
+           let id = $("#idinput").val();
+           let password = $("#passwordInput").val();
+
+           if(id === "") {
+               alert("아이디를 입력하세요");
+               return ;
+           }
+
+           if(password === "") {
+               alert("비밀번호를 입력하세요");
+               return ;
+           }
+
+            $.ajax({
+                type:"post"
+                , url:"/user/login-process"
+                , data:{"loginId":id, "password":password}
+                , success:function() {
+                    if(response.result === "success") {
+                        location.href = "/memo/list";
+                    } else {
+                        alert("아이디와 비밀번호를 확인해주세요")
+                    }
+                }
+                , error:function() {
+                    alert("로그인 에러!!");
+                }
+            });
+        });
+    </script>
 
 </html>

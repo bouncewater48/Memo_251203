@@ -1,5 +1,6 @@
 package com.bounce.memo.user.repository;
 
+import com.bounce.memo.user.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,5 +12,9 @@ public interface UserRepository {
             ,@Param("password") String password
             ,@Param("name") String name
             ,@Param("email") String email);
+
+    public User selectUser(
+            @Param("loginId") String loginId
+            , @Param("password") String password);
 
 }
