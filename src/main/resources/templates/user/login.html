@@ -19,7 +19,7 @@
 
     <script layout:fragment="script">
         $("#loginBtn").on("click", function() {
-           let id = $("#idinput").val();
+           let id = $("#idInput").val();
            let password = $("#passwordInput").val();
 
            if(id === "") {
@@ -36,7 +36,7 @@
                 type:"post"
                 , url:"/user/login-process"
                 , data:{"loginId":id, "password":password}
-                , success:function() {
+                , success:function(response) {
                     if(response.result === "success") {
                         location.href = "/memo/list";
                     } else {

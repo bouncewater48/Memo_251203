@@ -39,7 +39,7 @@ public class UserRestController {
 
     }
 
-    @PostMapping("login-process")
+    @PostMapping("/login-process")
     public Map<String, String> login(
             @RequestParam String loginId
             , @RequestParam String password
