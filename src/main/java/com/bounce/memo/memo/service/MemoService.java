@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemoService {
@@ -42,6 +43,11 @@ public class MemoService {
         return memoRepository.findByUserId(userId, Sort.by("id").descending());
     }
 
+    public Memo getMemo(long id) {
+        Optional<Memo> optionalMemo = memoRepository.findById(id);
+
+        return optionalMemo.get();
+    }
 
 
 }
