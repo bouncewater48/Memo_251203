@@ -1,10 +1,12 @@
 package com.bounce.memo.memo.service;
 
+import com.bounce.memo.common.FileManager;
 import com.bounce.memo.memo.domain.Memo;
 import com.bounce.memo.memo.repository.MemoRepository;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,12 +21,18 @@ public class MemoService {
     }
 
 //    성공 실패 여부 확인을 위해 boolean으로 return
-    public boolean createMemo(long userId, String title, String contents) {
+    public boolean createMemo(long userId
+            , String title
+            , String contents
+            , MultipartFile imageFile) {
+
+        String imagePath = FileManager.saveFile(userId, imageFile);
 
         Memo memo = Memo.builder()
                 .userId(userId)
                 .title(title)
                 .contents(contents)
+                .image_path(imagePath)
                 .build();
 
         try {
