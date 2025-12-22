@@ -65,6 +65,31 @@ public class FileManager {
 //        directoryName 앞에 이미 /가 있으므로 여기선 /를 추가하지 않음
         return "/images" + directoryName + "/" + file.getOriginalFilename();
 
+    }
+
+    // 파일 삭제 기능
+    public static boolean removeFile(String imagePath) {
+//        url path : /images/3_189298/test.png
+
+        if(imagePath == null) {
+            return false;
+        }
+
+//                                                  저장된 파일 이름 앞의 디렉터리 명 삭제
+        String fullFilePath = FILE_UPLOAD_PATH + imagePath.replace("/images", "");
+
+        Path path = Paths.get(fullFilePath);
+        Path directoryPath = path.getParent();
+
+        try {
+            Files.delete(path);
+            Files.delete(directoryPath);
+        } catch (IOException e) {
+            return false;
+        }
+
+        return true;
 
     }
+
 }
